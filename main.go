@@ -6,7 +6,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/adampresley/golang-webapp-starter-kit/controllers"
 	"github.com/adampresley/golang-webapp-starter-kit/global/logger"
 	"github.com/adampresley/golang-webapp-starter-kit/services/listener"
 	"github.com/adampresley/golang-webapp-starter-kit/services/middleware"
@@ -33,6 +32,10 @@ func startService() {
 	shutdownChannel := make(chan bool)
 	doneChannel := make(chan os.Signal)
 
+	/*
+	 * Start an HTTP listener then wait on a blocking channel for
+	 * a terminate signal.
+	 */
 	startHTTPListener(*ip, *port)
 
 	signal.Notify(doneChannel, syscall.SIGINT, syscall.SIGTERM)
@@ -46,15 +49,12 @@ func startService() {
 }
 
 func startHTTPListener(ip string, port int) {
-	httpListener := listener.NewHTTPListenerService(ip, port)
+	appContext := &middleware.AppContext{}
 
-	httpListener.
-		AddMiddleware(middleware.Logger).
-		AddMiddleware(middleware.OptionsHandler).
-		AddMiddleware(middleware.AccessControl)
+	httpListener := listener.NewHTTPListenerService(ip, port, appContext)
 
-	httpListener.
-		AddRoute("/greeting", controllers.HelloWorld, "GET")
+	setupMiddleware(httpListener, appContext)
+	setupRoutes(httpListener)
 
 	go httpListener.StartHTTPListener()
 }

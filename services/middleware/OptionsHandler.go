@@ -8,7 +8,7 @@ import (
 /*
 OptionsHandler is a middleware for handling OPTIONS requests.
 */
-func OptionsHandler(h http.Handler) http.Handler {
+func (ctx *AppContext) OptionsHandler(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		if request.Method == "OPTIONS" {
 			fmt.Fprintf(writer, "")

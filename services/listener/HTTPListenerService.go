@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/adampresley/golang-webapp-starter-kit/global/logger"
+	"github.com/adampresley/golang-webapp-starter-kit/services/middleware"
 
 	"github.com/gorilla/mux"
 	"github.com/justinas/alice"
@@ -19,6 +20,7 @@ StartHTTPListener.
 type HTTPListenerService struct {
 	Address string
 	Port    int
+	Context *middleware.AppContext
 
 	Router                 *mux.Router
 	BaseMiddlewareHandlers alice.Chain
@@ -27,11 +29,17 @@ type HTTPListenerService struct {
 /*
 NewHTTPListenerService creates a new instance of the HTTPListenerService
 */
-func NewHTTPListenerService(address string, port int) *HTTPListenerService {
+func NewHTTPListenerService(
+	address string,
+	port int,
+	appContext *middleware.AppContext,
+) *HTTPListenerService {
 	return &HTTPListenerService{
 		Address: address,
 		Port:    port,
-		Router:  mux.NewRouter(),
+		Context: appContext,
+
+		Router: mux.NewRouter(),
 	}
 }
 
