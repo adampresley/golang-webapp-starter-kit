@@ -16,6 +16,10 @@ This kit uses a lot of libraries.
 * [Alice](https://github.com/justinas/alice)
 * [GoHttpService](https://github.com/adampresley/GoHttpService)
 * [Logging](https://github.com/adampresley/logging)
+* [Bootstrap](http://getbootstrap.com/)
+* [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
+* [Promiscuous](https://github.com/RubenVerborgh/promiscuous)
+
 
 Getting Started
 ---------------
