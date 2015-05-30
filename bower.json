@@ -1,0 +1,21 @@
+{
+  "name": "Go Webapp Starter Kit",
+  "version": "0.0.1",
+  "authors": [
+    "Adam Presley <adam@adampresley.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "fontawesome": "~4.3.0",
+    "promiscuous": "~0.6.0"
+  }
+}

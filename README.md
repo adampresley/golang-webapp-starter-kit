@@ -17,6 +17,29 @@ This kit uses a lot of libraries.
 * [GoHttpService](https://github.com/adampresley/GoHttpService)
 * [Logging](https://github.com/adampresley/logging)
 
+Getting Started
+---------------
+Clone this project and copy the contents to your directory structure for Go.
+Perform a search and replace for anything ```github.com/adampresley/golang-webapp-starter-kit```
+and replace it with whatever your package structure is.
+
+Now open the file **/bower.json** and modify it to match your project's criteria.
+This may include the project name, authors, license, and dependencies. Save your
+changes. You should also make similar changes in the file **/package.json**.
+
+Once that is done you will need to perform a few things on the command line.
+The instructions below assume you have the following tools.
+
+* NodeJS/NPM
+* Bower
+
+```bash
+$ bower install
+$ npm install
+$ cd www/assets/promiscuous
+$ node ./build/build.js
+```
+
 
 License
 -------
