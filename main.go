@@ -19,12 +19,13 @@ var port = flag.Int("port", 8080, "Port number to bind this service to")
 func main() {
 	flag.Parse()
 
+	logger.Log = logging.NewLogger("Webapp Starter Kit")
+
 	setupLogger()
 	startService()
 }
 
 func setupLogger() {
-	logger.Log = logging.NewLogger("Webapp Starter Kit")
 }
 
 func startService() {
@@ -54,7 +55,7 @@ func startHTTPListener(ip string, port int) {
 	httpListener := listener.NewHTTPListenerService(ip, port, appContext)
 
 	setupMiddleware(httpListener, appContext)
-	setupRoutes(httpListener)
+	setupRoutes(httpListener, appContext)
 
 	go httpListener.StartHTTPListener()
 }

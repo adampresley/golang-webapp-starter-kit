@@ -9,6 +9,6 @@ func setupMiddleware(httpListener *listener.HTTPListenerService, appContext *mid
 	httpListener.
 		AddMiddleware(appContext.Logger).
 		AddMiddleware(appContext.StartAppContext).
-		AddMiddleware(appContext.OptionsHandler).
-		AddMiddleware(appContext.AccessControl)
+		AddMiddleware(appContext.AccessControl).
+		AddMiddleware(appContext.OptionsHandler)
 }
