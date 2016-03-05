@@ -2,9 +2,8 @@ package middleware
 
 import (
 	"net/http"
+	"net/url"
 	"time"
-
-	"github.com/adampresley/golang-webapp-starter-kit/global/logger"
 )
 
 /*
@@ -15,6 +14,8 @@ func (ctx *AppContext) Logger(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		startTime := time.Now()
 		h.ServeHTTP(writer, request)
-		logger.Log.Info(request.Method, "-", request.URL.String(), "(", time.Since(startTime), ")")
+
+		requestURL, _ := url.QueryUnescape(request.URL.String())
+		ctx.Log.Infof("%s - %s (%s)", request.Method, requestURL, time.Since(startTime))
 	})
 }

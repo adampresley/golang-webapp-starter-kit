@@ -44,6 +44,10 @@ $ cd www/assets/promiscuous
 $ node ./build/build.js
 ```
 
+Configuring
+-----------
+* The file **/routes.go** contains your HTTP routing information. Here you define your endpoints, asset paths, and so on.
+* The file **/flags.go** contains any command line flags your server should accept
 
 License
 -------

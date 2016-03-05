@@ -1,11 +1,10 @@
-package listener
+package server
 
 import (
 	"fmt"
 	"net/http"
 
-	"github.com/adampresley/golang-webapp-starter-kit/global/logger"
-	"github.com/adampresley/golang-webapp-starter-kit/services/middleware"
+	"github.com/adampresley/golang-webapp-starter-kit/middleware"
 
 	"github.com/gorilla/mux"
 	"github.com/justinas/alice"
@@ -99,6 +98,6 @@ func (service *HTTPListenerService) StartHTTPListener() error {
 		Handler: alice.New().Then(service.Router),
 	}
 
-	logger.Log.Info("HTTP listener started on", service.Address, ":", service.Port)
+	service.Context.Log.Info("HTTP listener started on", service.Address, ":", service.Port)
 	return listener.ListenAndServe()
 }

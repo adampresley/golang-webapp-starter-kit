@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"net/http"
 
+	"github.com/adampresley/logging"
 	"github.com/gorilla/context"
 )
 
@@ -14,7 +15,8 @@ should attach functions to this structure to pass critical data to request
 handlers.
 */
 type AppContext struct {
-	DB *sql.DB
+	DB  *sql.DB
+	Log *logging.Logger
 }
 
 /*
@@ -25,7 +27,10 @@ Context which comes across in the request.
 func (ctx *AppContext) StartAppContext(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		context.Set(request, "db", ctx.DB)
+		context.Set(request, "logger", ctx.Log)
 
 		h.ServeHTTP(writer, request)
+
+		context.Clear(request)
 	})
 }
